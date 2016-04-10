@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="GoogleHomePage">
+    <parameter name="appURL" value="https://www.google.co.in/"/>
+    <parameter name="browserType" value="firefox"/>
+    <test name="SignIn Test">
+        <classes>
+            <class name="com.google.tests.GoogleHomePageTestFactory"/>
+        </classes>
+    </test>
+</suite>

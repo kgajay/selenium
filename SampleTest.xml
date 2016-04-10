@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SampleTest">
+    <test name="Sample Test">
+        <classes>
+            <class name="com.google.tests.SampleDataFactory"/>
+        </classes>
+    </test>
+</suite>
