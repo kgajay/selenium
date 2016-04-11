@@ -13,16 +13,18 @@ import java.util.ArrayList;
 @Slf4j
 public class GoogleHomePageTestFactory {
 
-	public static String fileName = "FirstDemo.xlsx";
+	public static String fileName = "Test.xlsx";
 
 	@DataProvider()
 	static public Object[][] getTestData() throws Exception {
 
 		String projectPath = System.getProperty("user.dir");
 		String excelPath = projectPath + "//src//main//resources//" + fileName;
-		ExcelUtils excelUtils = new ExcelUtils(excelPath, "Sheet4");
+		ExcelUtils excelUtils = new ExcelUtils(excelPath, "Sheet3");
 		log.info("Total Rows: {} ", excelUtils.excelGetRows());
-		String[][] data = excelUtils.getExcelData();
+		int startRow = 1;
+		int endRow = 1;
+		String[][] data = excelUtils.readExcelRows(startRow, endRow);
 		return data;
 	}
 

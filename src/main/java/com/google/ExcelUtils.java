@@ -159,4 +159,41 @@ public class ExcelUtils {
 		}
 		return str;
 	}
+
+	public String[][] readExcelRows(int startRow, int endRow) {
+		int colCount = excelWSheet.getRow(0).getPhysicalNumberOfCells();
+		log.info("READ EXCEL DATA START-ROWS: {}, END-ROWS: {}, COL-COUNTS: {}", startRow, endRow, colCount);
+		String str[][] = new String[(endRow - startRow + 1)][colCount];
+		for (int rowIndex = startRow; rowIndex <= endRow; rowIndex++) {
+			Row row = excelWSheet.getRow(rowIndex);
+			if (row != null) {
+				for (int colIndex = 0; colIndex < colCount; colIndex++) {
+					Cell cell = row.getCell(colIndex);
+					// if (cell != null) {
+					int type = cell.getCellType();
+					Object res = "";
+					switch (type) {
+					case Cell.CELL_TYPE_NUMERIC: // 0
+						cell.setCellType(Cell.CELL_TYPE_STRING);
+						res = cell.getStringCellValue().trim();
+						break;
+					case Cell.CELL_TYPE_STRING: // 1
+						res = cell.getStringCellValue().trim();
+						break;
+					case Cell.CELL_TYPE_BLANK: // 3
+						res = "No value in cell";
+						break;
+					case Cell.CELL_TYPE_BOOLEAN: // 4
+						res = cell.getBooleanCellValue();
+						break;
+					default:
+						throw new RuntimeException("We don't support this cell type: " + type);
+					}
+					str[rowIndex-startRow][colIndex] = String.valueOf(res);
+					// }
+				}
+			}
+		}
+		return str;
+	}
 }

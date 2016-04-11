@@ -13,16 +13,17 @@ import java.util.ArrayList;
 @Slf4j
 public class SampleDataFactory {
 
-	public static String fileName = "FirstDemo.xlsx";
+	public static String fileName = "Test.xlsx";
 
 	@DataProvider()
 	static public Object[][] getTestData() throws Exception {
 
 		String projectPath = System.getProperty("user.dir");
 		String excelPath = projectPath + "//src//main//resources//" + fileName;
-		ExcelUtils excelUtils = new ExcelUtils(excelPath, "sheet2");
+		ExcelUtils excelUtils = new ExcelUtils(excelPath, "Sheet2");
 		log.info("Total Rows: {} ", excelUtils.excelGetRows());
-		String[][] data = excelUtils.getExcelData();
+		// String[][] data = excelUtils.getExcelData();
+		String[][] data = excelUtils.readExcelRows(1, 4);
 		return data;
 	}
 
